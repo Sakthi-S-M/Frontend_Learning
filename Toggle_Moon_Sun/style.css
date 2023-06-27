@@ -1,0 +1,58 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+body.dark {
+  background-color: #292c35;
+}
+
+body.dark h1 {
+  color: #fff;
+}
+body.dark .checkbox-label {
+  background-image: url("https://cdn.pixabay.com/photo/2013/07/12/14/50/moon-148905_1280.png");
+}
+.checkbox {
+  opacity: 0;
+  position: absolute;
+}
+div {
+  align-self: center;
+  top: 50%;
+  left: auto;
+  position: absolute;
+}
+.checkbox-label {
+  background-image: url("https://cdn.pixabay.com/photo/2013/07/12/14/50/clouds-148904_1280.png");
+  background-size: cover;
+  width: 300px;
+  height: 160px;
+  border-radius: 80px;
+  position: relative;
+  padding: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.checkbox-label .ball {
+  background-color: #fff;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  border-radius: 80%;
+  transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .checkbox-label .ball {
+  transform: translateX(140px);
+}
