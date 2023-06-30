@@ -1,0 +1,115 @@
+/* .parent {
+  border: 4px solid red;
+}
+.parent > div {
+  border: 2px solid;
+  height: 200px;
+  width: 100px;
+}
+body {
+  color: black;
+}
+.child1 {
+  float: right;
+}
+.child2 {
+  float: left;
+}
+.child3 {
+  float: left;
+}
+.child4 {
+  float: right;
+}
+.child5 {
+  clear: both;
+}
+.box1 {
+  border: 2px dotted green;
+}
+.para1 {
+  color: rgb(119, 169, 250);
+}
+p {
+  border: 2px dotted rgb(85, 140, 218);
+}
+.positioned {
+  position: relative;
+  top: 50px;
+  left: 10px;
+  background-color: rgb(139, 174, 139);
+}
+.fixed {
+  position: fixed;
+  top: 200px;
+  left: 10px;
+  background: rgb(123, 190, 110);
+}
+.stick {
+  position: sticky;
+  top: 20px;
+  right: 30px;
+  background-color: rgb(118, 186, 186);
+}
+.statics {
+  position: static;
+  background-color: blanchedalmond;
+}
+.parent-global {
+  border: 1px dashed yellowgreen;
+}
+.subchild-1 {
+  border: 2px solid #86d5ef;
+  font-size: x-large;
+}
+.sschild-1 {
+  border: inherit;
+  font-size: initial;
+}
+.subchild-2 {
+  border: 3px solid rgb(213, 116, 116);
+}
+.sschild-2 {
+  border: inherit;
+  color: blueviolet;
+}
+.rev {
+  color: bisque;
+}
+.revert {
+  color: revert;
+}
+
+@layer special,normal;
+
+@layer special {
+  .item {
+    color: royalblue;
+  }
+  .feature {
+    color: revert-layer;
+  }
+}
+@layer normal {
+  .item {
+    color: blanchedalmond;
+  }
+  .feature {
+    color: #86d5ef;
+  }
+}
+
+.revert {
+  color: red;
+} */
+.parent {
+  display: grid;
+  width: 500px;
+  height: 300px;
+  grid-template-columns: 2fr 1fr 1fr;
+  border: 2px solid brown;
+}
+.child {
+  height: 20px;
+  border: 1px dashed black;
+}

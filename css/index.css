@@ -1,0 +1,40 @@
+.parent {
+  display: grid;
+  border: 1px solid black;
+  height: 500px;
+  height: 500px;
+  grid-template-columns: repeat(1,4);
+  grid-template-rows: auto;
+  grid-template-areas:
+    "leftnav header header rightnav"
+    "leftnav body body rightnav"
+    "leftnav body body rightnav"
+    "footer footer footer footer";
+}
+.parent > div {
+  margin: 10px;
+}
+.header {
+  grid-area: header;
+  border: 2px solid;
+}
+
+.leftnav {
+  grid-area: leftnav;
+  border: 2px solid;
+}
+
+.rightnav {
+  grid-area: rightnav;
+  border: 2px solid;
+}
+
+.footer {
+  grid-area: footer;
+  border: 2px solid;
+}
+
+.body {
+  grid-area: body;
+  border: 2px solid;
+}
