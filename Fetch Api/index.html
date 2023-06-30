@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Calls</title>
+</head>
+<body>
+    <form id="form">
+                    <div>
+                        <label for="userCode">user Code</label>
+                        <input type="text" name="userCode" id="userCode">
+                        <br>
+                        <br>
+                    </div>
+                    <div>
+                        <label for="title">Title</label>
+                        <input type="text" name="title" id="title">
+                        <br>
+                        <br>
+                    </div>
+                    <div>
+                        <label for="id">Id</label>
+                        <input type="text" name="id" id="id">
+                        <br>
+                        <br>
+                    </div>
+                    <input type="submit" value="Submit" id="pos">
+                    <input type="button" value="Abort" onClick="abortit()" id="abt">
+                    <input type="button" value="Get" onClick="getdata()">
+                    <input type="button"  value="delete" onClick="deletedata()">
+                    <input type="button" value="update" onClick="updatedata()">
+    </form>
+</body>
+<script src="/index.js"></script>
+</html>
