@@ -1,0 +1,227 @@
+.container {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: block;
+  margin: 15px auto;
+  position: relative;
+  color: rgb(112, 221, 240);
+  box-sizing: border-box;
+  animation: aloader 1s linear infinite alternate;
+}
+
+@keyframes aloader {
+  0% {
+    box-shadow: -38px -12px, -14px 0, 14px 0, 38px 0;
+  }
+  33% {
+    box-shadow: -38px 0px, -14px -12px, 14px 0, 38px 0;
+  }
+  66% {
+    box-shadow: -38px 0px, -14px 0, 14px -12px, 38px 0;
+  }
+  100% {
+    box-shadow: -38px 0, -14px 0, 14px 0, 38px -12px;
+  }
+}
+
+.animation1 {
+  width: 48px;
+  height: 48px;
+  background: #9dcc82;
+  display: inline-block;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: block;
+  margin: 15px auto;
+  animation: bloader 1s ease-in infinite;
+}
+
+@keyframes bloader {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.animation2 {
+  width: 48px;
+  height: 48px;
+  background: #ae82cc;
+  display: inline-block;
+  border-radius: 50%;
+  box-sizing: border-box;
+  display: block;
+  margin: 15px auto;
+  animation: cloader 1s ease-out infinite;
+}
+
+@keyframes cloader {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.animation3 {
+  position: relative;
+  margin: auto;
+  box-sizing: border-box;
+  background-clip: padding-box;
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  transform-origin: 50% 60%;
+  transform: perspective(200px) rotateX(66deg);
+  animation: spinner-wiggle 1.2s infinite;
+}
+.animation3:before,
+.animation3:after {
+  content: "";
+  position: absolute;
+  margin: -4px;
+  box-sizing: inherit;
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+  opacity: 0.05;
+  border: inherit;
+  border-color: transparent;
+  animation: spinner-spin 1.2s cubic-bezier(0.6, 0.2, 0, 0.8) infinite,
+    spinner-fade 1.2s linear infinite;
+}
+
+.animation3:before {
+  border-top-color: #66e6ff;
+}
+
+.animation3:after {
+  border-top-color: #f0db75;
+  animation-delay: 0.3s;
+}
+
+@keyframes spinner-spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spinner-fade {
+  20% {
+    opacity: 0.1;
+  }
+  40% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0.1;
+  }
+}
+
+.animation4 {
+  color: grey;
+  font-family: sans-serif;
+  height: 5vh;
+  left: 50%;
+  overflow-x: hidden;
+  padding-top: 7vh;
+  position: absolute;
+  text-align: center;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  &:before {
+    animation: left-to-right 3s alternate infinite linear;
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      rgb(198, 222, 110),
+      transparent
+    );
+    content: "";
+    height: 5vh;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 60%S;
+  }
+  &:after {
+    background-image: repeating-linear-gradient(
+      90deg,
+      white,
+      white 1vw,
+      transparent 1vw,
+      transparent 10vw
+    );
+    content: "";
+    height: 5vh;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+@keyframes left-to-right {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+#box {
+  width: 50px;
+  height: 50px;
+  background: #92e085;
+  animation: animate 0.5s linear infinite;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  border-radius: 3px;
+}
+@keyframes animate {
+  17% {
+    border-bottom-right-radius: 3px;
+  }
+  25% {
+    transform: translateY(9px) rotate(22.5deg);
+  }
+  50% {
+    transform: translateY(18px) scale(1, 0.9) rotate(45deg);
+    border-bottom-right-radius: 40px;
+  }
+  75% {
+    transform: translateY(9px) rotate(67.5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(90deg);
+  }
+}
+#shadow {
+  width: 50px;
+  height: 5px;
+  background: #000;
+  opacity: 0.1;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  border-radius: 50%;
+  animation: shadow 0.5s linear infinite;
+}
+@keyframes shadow {
+  50% {
+    transform: scale(1.2, 1);
+  }
+}
