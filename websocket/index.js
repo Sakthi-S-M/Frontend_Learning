@@ -1,29 +1,52 @@
-// WebSocket connection
 const WebSocket = require("ws");
-const socket = new WebSocket("ws://localhost:3000");
 
-// Event listener for name input
-window.addEventListener("load", () => {
-  userName = prompt("Enter your name:");
+const wss = new WebSocket.Server({ port: 3000 });
+const typingStatus = {};
+wss.on("connection", function (ws, request) {
+  const username = request.url.substring(1);
+  console.log(`WebSocket connection established for user: ${username}`);
+
+  ws.on("message", function (data) {
+    const message = JSON.parse(data);
+
+    if (message.type === "chat") {
+      broadcastMessage(ws, message.text, message.username);
+    } else if (message.type === "typing") {
+      handleTypingIndicator(ws, message.username, message.isTyping);
+    }
+  });
+
+  ws.on("close", function () {
+    console.log(`WebSocket connection closed for user: ${username}`);
+    handleTypingIndicator(ws, username, false);
+  });
 });
 
-// WebSocket event listeners
-socket.addEventListener("open", () => {
-  console.log("Connected to WebSocket server.");
-});
+function broadcastMessage(sender, message, username) {
+  wss.clients.forEach(function (client) {
+    if (client !== sender && client.readyState === WebSocket.OPEN) {
+      const data = {
+        type: "chat",
+        text: message,
+        username: username,
+      };
+      client.send(JSON.stringify(data));
+    }
+  });
+}
 
-socket.addEventListener("message", (event) => {
-  const message = event.data;
+function handleTypingIndicator(sender, username, isTyping) {
+  typingStatus[username] = isTyping;
 
-  if (message === "typing") {
-    displayMessage(`${userName} is typing...`);
-  } else if (message === "stopped typing") {
-    displayMessage(`${userName} stopped typing.`);
-  } else {
-    displayMessage(message);
-  }
-});
+  wss.clients.forEach(function (client) {
+    if (client !== sender && client.readyState === WebSocket.OPEN) {
+      const data = {
+        type: "typing",
+        username: username,
+        isTyping: isTyping,
+      };
+      client.send(JSON.stringify(data));
+    }
+  });
+}
 
-socket.addEventListener("close", () => {
-  console.log("Disconnected from WebSocket server.");
-});
