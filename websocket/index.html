@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebSocket Chat</title>
+  </head>
+  <body>
+    <input type="text" id="messageInput" placeholder="Type your message..." />
+    <button onclick="sendMessage()">Send</button>
+    <p id="typingIndicator"></p>
+    <ul id="messages"></ul>
+
+    <script>
+      const username = prompt("Enter your username:");
+      const socket = new WebSocket("ws://localhost:3000", username);
+
+      socket.onopen = function () {
+        console.log("WebSocket connection established.");
+      };
+
+      socket.onmessage = function (event) {
+        const message = JSON.parse(event.data);
+
+        if (message.type === "chat") {
+          displayMessage(message.text, message.username);
+        } else if (message.type === "typing") {
+          handleTypingIndicator(message.username, message.isTyping);
+        }
+      };
+
+      socket.onclose = function () {
+        console.log("WebSocket connection closed.");
+      };
+
+      function sendMessage() {
+        const input = document.getElementById("messageInput");
+        const message = input.value.trim();
+
+        if (message !== "") {
+          const data = {
+            type: "chat",
+            text: message,
+            username: username,
+          };
+
+          socket.send(JSON.stringify(data));
+          input.value = "";
+          displayMessage(message, "You");
+        }
+      }
+
+      function displayMessage(message, sender) {
+        const ul = document.getElementById("messages");
+        const li = document.createElement("li");
+        li.textContent = `${sender}: ${message}`;
+        ul.appendChild(li);
+      }
+
+      function handleTypingIndicator(username, isTyping) {
+        const typingIndicator = document.getElementById("typingIndicator");
+
+        if (isTyping) {
+          typingIndicator.textContent = `${username} is typing...`;
+        } else {
+          typingIndicator.textContent = "";
+        }
+      }
+
+      function handleTyping() {
+        const input = document.getElementById("messageInput");
+        const typing = input.value.trim() !== "";
+
+        const data = {
+          type: "typing",
+          username: username,
+          isTyping: typing,
+        };
+
+        socket.send(JSON.stringify(data));
+      }
+
+      const input = document.getElementById("messageInput");
+      input.addEventListener("input", handleTyping);
+    </script>
+  </body>
+</html>
