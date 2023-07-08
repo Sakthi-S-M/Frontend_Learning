@@ -6,17 +6,39 @@ body {
   align-items: center;
   flex-direction: column;
   text-align: center;
+  transition: background-color 2s linear, opacity 1s linear;
+}
+@media (prefers-color-scheme: dark) {
+  html {
+    background: black;
+    color: #ffffff;
+  }
 }
 
 body.dark {
   background-color: #292c35;
+  transition: background-color 2s linear, opacity 1s linear;
+}
+
+@keyframes change {
+  from {
+    background-color: #fff;
+    opacity: 0;
+  }
+  to {
+    background-color: #292c35;
+    opacity: 1;
+  }
 }
 
 body.dark h1 {
   color: #fff;
 }
 body.dark .checkbox-label {
-  background-image: url("https://cdn.pixabay.com/photo/2013/07/12/14/50/moon-148905_1280.png");
+  background-color: black;
+}
+.moon {
+  opacity: 1;
 }
 .checkbox {
   opacity: 0;
@@ -29,7 +51,7 @@ div {
   position: absolute;
 }
 .checkbox-label {
-  background-image: url("https://cdn.pixabay.com/photo/2013/07/12/14/50/clouds-148904_1280.png");
+  background-color: #a7eeea;
   background-size: cover;
   width: 300px;
   height: 160px;
@@ -42,6 +64,57 @@ div {
   box-sizing: border-box;
 }
 
+.checkbox-label::before,
+.checkbox-label::after {
+  content: "";
+  position: absolute;
+}
+
+.moon {
+  width: 60px;
+  height: 70px;
+  left: 40px;
+  top: 40px;
+  border-radius: 50%;
+  transform: rotate(-45deg);
+  background-color: #000000;
+}
+.moon {
+  box-shadow: 5px 5px 0 5px rgb(255, 255, 255);
+  animation: moon 2s linear infinite;
+}
+
+@keyframes moon {
+  0% {
+    transform: rotate(10rad);
+  }
+  100% {
+    transform: rotate(20rad);
+  }
+}
+
+.sun {
+  width: 80px;
+  height: 70px;
+  right: 30px;
+  top: 40px;
+  border-radius: 50%;
+  transform: rotate(-45deg);
+  background-color: yellow;
+}
+.sun {
+  box-shadow: 5px 5px 0 5px yellow;
+  animation: sunRays 5s linear infinite;
+}
+
+@keyframes sunRays {
+  0% {
+    transform: rotate(-45deg);
+  }
+  100% {
+    transform: rotate(-405deg);
+  }
+}
 .checkbox-label .ball {
   background-color: #fff;
   width: 120px;
@@ -50,9 +123,22 @@ div {
   left: 20px;
   top: 20px;
   border-radius: 80%;
-  transition: transform 0.2s linear;
+  transition: transform 1s linear;
+  z-index: 3;
 }
 
 .checkbox:checked + .checkbox-label .ball {
   transform: translateX(140px);
+}
+
+.checkbox:checked + .checkbox-label .moon {
+  display: block;
+}
+
+.checkbox:checked + .checkbox-label .sun {
+  display: none;
+}
+
+.checkbox:not(:checked) + .checkbox-label .moon {
+  display: none;
 }
